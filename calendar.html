@@ -1,0 +1,133 @@
+<html>
+    <head>
+    <title>Dynamite Rhythm - Calendar</title> 
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="images/IsabelTS_Logo.png">
+    <link rel="stylesheet" type ="text/css" href="style.css"/>
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        
+        <script>
+        $(document).ready(function(){
+            var gig1open = false;
+            var gig2open = false;
+            $("#gig1").click(function(){
+                if(gig2open == true){
+                    $(".gig2").toggleClass("open");
+                    gig2open = !gig2open;
+                }
+                $(".gig1").toggleClass("open");
+                gig1open = !gig1open; 
+            });
+            $("#gig2").click(function(){
+                if(gig1open == true){
+                    $(".gig1").toggleClass("open");
+                    gig1open = !gig1open; 
+                }
+                $(".gig2").toggleClass("open");
+                gig2open = !gig2open;
+            });
+        });
+        
+        </script>
+        
+</head>
+<body>
+   <a class=burger-nav></a>
+    <div class="navbar">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contactme.php">Contact Me</a></li>
+    <li class="active"><a href="upcomingshows.html">Upcoming Shows</a></li>
+    <li><a href="photogallery.html">Media</a></li>
+    </ul>
+    </div>
+    
+    
+    
+    
+    <div id="calendarcontainer">
+        <div id="calendar">
+        <div class="month">
+            <strong>December 2020</strong>
+            <button id = "prevMonth">&#10094;</button>
+            <button id="nextMonth">&#10095;</button>
+            </div>
+            <table id="Dec19">
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td class="gig" id="gig1">8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td class="gig" id="gig2">19</td>
+                    <td>20</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+        </div>
+    
+    <div class="gig1">
+   <h2 class="event">Putnam Holiday Light Parade</h2>
+    <h3 class="time">5 to 8 pm</h3>
+        <h3 class="location">Putnam, CT</h3>
+        <h3 class="info"><a href="https://www.facebook.com/events/downtown-putnam-connecticut/18th-annual-holiday-dazzle-light-parade/2450265328586484/" target="_blank">More info</a></h3>
+    </div>
+    
+    <div class="gig2">
+        <h2 class="event">Holiday Family Meal</h2>
+    <h3 class="time">4:30 pm</h3>
+        <h3 class="location">Scituate, MA</h3>
+    </div>
+    
+
+    
+    </body>
+</html>

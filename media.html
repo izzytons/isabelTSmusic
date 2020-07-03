@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+<title>Media</title>
+<link rel="shortcut icon" href="images/IsabelTS_Logo.png">
+    <link rel="stylesheet" type ="text/css" href="style.css"/>
+    </head>
+    
+    <body>
+        
+        <div class="slideshow-container">
+            <img name="slide">
+            <br>
+            <div id="caption" style="text-align: center; font-family: sans-serif; font-size: 12px;">Caption</div>
+            <br>
+             </div>
+        <a class="previous" onclick="prevImage()">&#10094;</a>
+            <a class="next" onclick="nextImage()">&#10095;</a>
+            
+        
+    <a class=burger-nav></a>
+    
+    <div class="navbar">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contactme.php">Contact Me</a></li>
+    <li><a href="upcomingshows.html">Upcoming Shows</a></li>
+    <li class="active"><a href="media.html">Media</a></li>
+        <li class="logo"><img src="images/ITS_Logo.png"></li>
+    </ul>
+    </div>
+        
+    
+        
+        
+        <script>
+            var imageIndex =  0;
+            var images = [];
+            var captions = [];
+            captions[0] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[1] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[2] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[3] = "Rave On at the Stadium Theater - Photo by Phil Smith";
+            captions[4] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[5] = "Dynamite Rhythm at VWs on the Hill - Photo by Kevin Depot";
+            captions[6] = "Dynamite Rhythm - Photo by Erin Landry";
+            captions[7] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[8] = "Rave On at the Stadium Theater - Photo by Phil Smith";
+            captions[9] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[10] = "Paw Sox Game - Photo by Timothy Ricatta";
+            captions[11] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[12] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[13] = "Dynamite Rhythm at Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[14] = "Dynamite Rhythm at VWs on the Hill - Photo by Kevin Depot";
+            captions[15] = "Rave On at the Stadium Theater - Photo by Phil Smith";  
+            captions[16] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[17] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[18] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[19] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[20] = "Paw Sox Game - Photo by Timothy Ricatta";
+            captions[21] = "Rave On at the Stadium Theater - Photo by Phil Smith";  
+            captions[22] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[23] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[24] = "Paw Sox Game - Photo by Timothy Ricatta";
+            captions[25] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[26] = "Rock of Ages Pit - Bradley Theatre";
+            captions[27] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[28] = "Rave On at the Stadium Theater - Photo by Phil Smith";
+            captions[29] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            captions[30] = "Paw Sox Game - Photo by Timothy Ricatta";
+            captions[31] = "Woodstock Fair 2019 - Photo by Phil Smith";
+            captions[32] = "Dynamite Rhythm at VWs on the Hill - Photo by Kevin Depot";
+            captions[33] = "Alternatives Summer Concert Series 2019 - Photo by Phil Smith";
+            
+            //list of images
+            images[0] = "images/alternatives5.jpg";
+            images[1] = "images/woodstock2.jpg"; 
+            images[2] = "images/alternatives3.jpg";
+            images[3] = "images/Stadium3.jpg";
+            images[4] = "images/WOODSTOCK11.jpg";
+            
+            images[5] = "images/carshowvocals.jpg";
+            images[6] = "images/DynamiteSmiling.jpg";
+            images[7] = "images/alternatives2.jpg";
+            images[8] = "images/Stadium1.jpg"; 
+            images[9] = "images/WOODSTOCK14.jpg";
+            
+            images[10] = "images/DSC_0803.jpg";
+            images[11] = "images/woodstock6.jpg";
+            images[12] = "images/alternatives4.jpg"; 
+            images[13] = "images/woodstockFullBand.jpg";
+            images[14] = "images/carshowguitar2.jpg";
+            
+            images[15] = "images/Stadium2.jpg";
+            images[16] = "images/woodstock1.jpg";
+            images[17] = "images/alternatives8.jpg";
+            images[18] = "images/woodstock19.jpg";
+            images[19] = "images/woodstock3.jpg";
+            
+            images[20] = "images/DSC_0853.jpg";
+            images[21] = "images/Stadium4.jpg"; 
+            images[22] = "images/woodstock5.jpg";
+            images[23] = "images/WOODSTOCK9.jpg";
+            images[24] = "images/DSC_0802.jpg";
+            
+            images[25] = "images/PhilPhoto1.jpg";
+            images[26] = "images/ROABandPic.jpg";
+            images[27] = "images/alternatives8.jpg";
+            images[28] = "images/Stadium6.jpg";
+            images[29] = "images/alternatives1.jpg";
+            
+            images[30] = "images/DSC_0809.jpg";
+            images[31] = "images/woodstock17.jpg";
+            images[32] = "images/carshowguitar1.jpg";
+            images[33] = "images/Stadium5.jpg";
+            
+            //change the image     
+            function nextImage(){
+                //calculate window dimenstions
+                /* var height = window.innerHeight;
+                var width = window.innerWidth;
+                */
+                
+                if( imageIndex < images.length - 1){
+                    imageIndex++;
+                } else{
+                    imageIndex = 0;
+                }
+                document.slide.src = images[imageIndex];
+                document.getElementById('caption').innerHTML = captions[imageIndex];
+                //landscape
+                /*if(document.getElementByName('slide').width > document.getElementByName('slide').height){
+                    document.getElementsByName('slide').width = width * 0.5;
+                } else{
+                    //portrait
+                    document.getElementByName('slide').height = height * 0.5;
+                } */
+                
+            }
+            
+            function prevImage(){
+                //calculate window dimenstions
+               /* var height = window.innerHeight;
+                var width = window.innerWidth;
+                */
+                
+                if(imageIndex > 0){
+                    imageIndex--;
+                } else{
+                    imageIndex = images.length-1;
+                }
+                document.slide.src = images[imageIndex];
+                document.getElementById('caption').innerHTML = captions[imageIndex];
+                //landscape
+                /*
+                if(document.getElementByName('slide').width > document.getElementByName('slide').height){
+                    document.getElementsByName('slide').width = width * 0.5;
+                } else{
+                    //portrait
+                    document.getElementByName('slide').height = height * 0.5;
+                }
+                */
+            }
+            
+            window.onload = document.slide.src = images[0];
+            window.onload = document.getElementById('caption').innerHTML = captions[0];
+        </script>
+        
+        
+        <script src="jquery.min.js"></script>
+    <script src="menu.js"></script>
+        
+        </body>
+
+    
+</html>
