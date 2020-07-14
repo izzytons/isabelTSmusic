@@ -653,6 +653,11 @@ media body
         outline: 0;
     }
     
+    #bioPic{
+        padding-bottom: 50px;
+        width: 80%;
+    }
+    
     #bio
     {
     width: 80%;
