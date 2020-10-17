@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email_body = "You received a message from $name.\n".
             "user email: $visitor_email\n".
             "$name said: \n $message";
-        $to = "izzytons@gmail.com";
+        $to = "isabeltsmusic@outlook.com";
         $headers = "From:" . $email_from . "\r\n";
         $headers .= "Reply-To:" . $visitor_email . "\r\n";
         $headers .= "X-Priority: 1 (Highest)\n"; 
