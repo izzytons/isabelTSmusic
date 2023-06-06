@@ -81,7 +81,22 @@ function CreateCalendarObject(gig){
         minute: 'numeric',
         hour12: true
     });
-    eventTitle.innerHTML = gig.Title;
+    switch (gig.Band){
+        case "DynamiteRhythm":
+            eventTitle.innerHTML = `Dynamite Rhythm - ${gig.Title}`;
+            break;
+        case "TJAndTheCampers":
+            eventTitle.innerHTML = `TJ & The Campers - ${gig.Title}`;
+            break;
+        case "RaveOn":
+            eventTitle.innerHTML = `Rave On - ${gig.Title}`;
+            break;
+        case "GoodLivingBand":
+            eventTitle.innerHTML = `Good Living Band - ${gig.Title}`;
+            break;
+        default:
+            eventTitle.innerHTML = gig.Title;
+    }
 
         // create description and location paragraphs for each line from input
     const descriptionLines = gig.Description.split("\n");
@@ -105,18 +120,8 @@ function CreateCalendarObject(gig){
 async function PopulateCalendarPage(){
     console.log("Running PopulateCalendarPage");
 
-    const gigsFromDB = await gigManager.GetGigs(); // get gig list from DB
-    console.log(`Gigs retrieved from API: ${JSON.stringify(gigsFromDB)}`);
-
-    // Filter out past gigs
-    const currentDate = new Date();
-    currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
-    const futureGigs = gigsFromDB.filter((x) => { 
-        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
-        return gigDate >= currentDate;
-    });
-
-    console.log(`future gigs: ${JSON.stringify(futureGigs)}`);
+    //Retrieve gig lists for each band/db-container and organize them accordingly
+    const futureGigs = await GetAllGigs();
 
     // Construct page differently if no future gigs
     if (futureGigs.length == 0){
@@ -124,8 +129,8 @@ async function PopulateCalendarPage(){
         const noGigsDiv = document.createElement("div");
         const firstLine = document.createElement("h1");
         const secondLine = document.createElement("h1");
-        firstLine.innerHTML = "We have no upcoming gigs at the moment.";
-        secondLine.innerHTML = "More coming soon!";
+        firstLine.innerHTML = "Currently booking more gigs.";
+        secondLine.innerHTML = "Check back soon!";
         noGigsDiv.appendChild(firstLine);
         noGigsDiv.appendChild(secondLine);
         noGigsDiv.style.textAlign = "center";
@@ -155,18 +160,8 @@ async function PopulateCalendarPage(){
 async function PopulateEditCalendarPage(){
     console.log("Running PopulateEditCalendarPage");
     const eventContainer = document.getElementById("event_container");
-    const gigsFromDB = await gigManager.GetGigs(); // get gig list from DB
-    console.log(`Gigs retrieved from API: ${JSON.stringify(gigsFromDB)}`);
-
-    // Filter out past gigs
-    const currentDate = new Date();
-    currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
-    const futureGigs = gigsFromDB.filter((x) => { 
-        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
-        return gigDate >= currentDate;
-    });
-
-    console.log(`future gigs: ${JSON.stringify(futureGigs)}`);
+    //Retrieve gig lists for each band/db-container and organize them accordingly
+    const futureGigs = await GetAllGigs();
 
     // Group gigs by year
     const groupedGigs = GroupByYear(futureGigs);
@@ -323,6 +318,32 @@ async function CreateGigSubmit(){
 
     CloseModal();
     ReloadEditPage();
+}
+
+// Function to retreieve and organize all gigs from DB
+async function GetAllGigs(){
+    const [drGigs, tjGigs, roGigs, glbGigs, personalGigs] = await Promise.all([gigManager.GetGigs("dynamiterhythm"), 
+                                                                                gigManager.GetGigs("tjandthecampers"),
+                                                                                gigManager.GetGigs("raveon"),
+                                                                                gigManager.GetGigs("goodlivingband"),
+                                                                                gigManager.GetGigs("personalgigs")
+                                                                                ]);
+
+    const combinedGigs = drGigs.concat(tjGigs, roGigs, glbGigs, personalGigs);
+    console.log(combinedGigs);
+
+    // Filter out past gigs
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
+    const futureGigs = combinedGigs.filter((x) => { 
+        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
+        return gigDate >= currentDate;
+    });
+
+    // Return list ordered by date
+    return futureGigs.sort((a, b) => {
+        return new Date(a.DateAndTime) - new Date(b.DateAndTime);
+    });
 }
 
 function ReloadEditPage(){

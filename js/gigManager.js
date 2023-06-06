@@ -1,6 +1,6 @@
 // Get DR Gigs
-export async function GetGigs(){
-    const response = await fetch("https://gig-api.netlify.app/.netlify/functions/api/gigs/dynamiterhythm/", {
+export async function GetGigs(band){
+    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/${band}/`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json; charset=UTF-8",
@@ -17,8 +17,8 @@ export async function GetGigs(){
     return response;
 }
 
-export async function CreateGig(newGig){
-    const response = await fetch("https://gig-api.netlify.app/.netlify/functions/api/gigs/dynamiterhythm/", {
+export async function CreateGig(newGig, band){
+    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/${band}/`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json; charset=UTF-8",
@@ -42,8 +42,8 @@ export async function CreateGig(newGig){
     return response;
 }
 
-export async function UpdateGig(gigId, updatedGig){
-    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/dynamiterhythm/${gigId}`, {
+export async function UpdateGig(gigId, updatedGig, band){
+    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/${band}/${gigId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -67,8 +67,8 @@ export async function UpdateGig(gigId, updatedGig){
     return response;
 }
 
-export async function DeleteGig(gigId){
-    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/dynamiterhythm/${gigId}`, {
+export async function DeleteGig(gigId, band){
+    const response = await fetch(`https://gig-api.netlify.app/.netlify/functions/api/gigs/${band}/${gigId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json; charset=UTF-8",
