@@ -340,8 +340,11 @@ async function GetAllGigs(){
         return gigDate >= currentDate;
     });
 
+    // Filter out gigs I'm not playing
+    const gigsIzzyPlaying = futureGigs.filter(x => x.IzzyPlaying);
+
     // Return list ordered by date
-    return futureGigs.sort((a, b) => {
+    return gigsIzzyPlaying.sort((a, b) => {
         return new Date(a.DateAndTime) - new Date(b.DateAndTime);
     });
 }
