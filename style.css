@@ -403,7 +403,143 @@ td:hover{
 }
 
 
+.modification-buttons{
+    display: flex;
+    flex-direction: row; 
+    margin-top: -40px;
+    padding-bottom: 40px;  
+}
 
+.modification-buttons button{
+    background-color: grey;
+}
+
+#deletegig-button{
+    background-color: red;
+}
+
+/*Update Gig Modal*/
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 800px;
+  max-width: 80%;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+padding: 10px 15px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+.modal-header .close-button {
+cursor: pointer;
+border: none;
+outline: none;
+color: black;
+background: none;
+font-size: 2rem;
+font-weight: bold;
+width: fit-content;
+height: fit-content;
+margin-top: 0;
+}
+
+.modal-body {
+    padding: 10px 15px;
+  }
+  
+#overlay {
+position: fixed;
+opacity: 0;
+transition: 200ms ease-in-out;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, .5);
+pointer-events: none;
+}
+
+#overlay.active {
+opacity: 1;
+pointer-events: all;
+}
+
+/* Loading Screen */
+.preloader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    transition: opacity 0.75s, visibility 0.75s;
+}
+
+.preloader-hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader::after{
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: #4CAF50;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from{
+        transform: rotate(0turn);
+    }
+
+    to{
+        transform: rotate(1turn);
+    }
+}
+
+/* Page Transitions */
+
+#indexbody, #aboutBody, #contactbody{
+    animation: transitionIn 0.85s;
+}
+
+@keyframes transitionIn {
+    from{
+        opacity: 0;
+        /*transform: rotateX(-10deg);*/
+    }
+
+    to{
+        opacity: 1;
+        /*transform: rotateX(0);*/
+    }
+}
 
 
 /*Media Styling*/
