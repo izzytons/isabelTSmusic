@@ -23,6 +23,8 @@ const modal = document.getElementById("update-gig-modal");
 const closeButton = document.getElementById("close-button");
 const eventContainer = document.getElementById("event_container");
 
+var customLoadedEvent = new CustomEvent("AllPageContentLoaded");
+
 // OnLoad Event
 window.onload = async () => {
     if (document.body.classList.contains("upcomingshows")){
@@ -31,9 +33,11 @@ window.onload = async () => {
     else if (document.body.classList.contains("editcalendar")){
         await PopulateEditCalendarPage();
         closeButton.addEventListener("click", () => CloseModal());
-        console.log(`current date: ${currentDate.toLocaleString('en-us')}`);
+        //console.log(`current date: ${currentDate.toLocaleString('en-us')}`);
         document.getElementById('GigDateAndTime').value = dateHelper.formatDate(new Date());
-}
+    }
+
+window.dispatchEvent(customLoadedEvent);
 
 // Create single calendar html object for a gig object
 function CreateCalendarObject(gig){
@@ -72,7 +76,6 @@ function CreateCalendarObject(gig){
 
     // Fill in information
     const gigDateAndTime = dateHelper.ConvertFromISO(gig.DateAndTime);
-    console.log(gigDateAndTime);
     eventDay.innerHTML = gigDateAndTime.getDate();
     eventMonth.innerHTML = monthNames[gigDateAndTime.getMonth()];
     eventTime.innerHTML = "<img src=images/time.png alt=\"\" />";
@@ -118,8 +121,6 @@ function CreateCalendarObject(gig){
 
 // Display upcoming shows on html page using data returned from API
 async function PopulateCalendarPage(){
-    console.log("Running PopulateCalendarPage");
-
     //Retrieve gig lists for each band/db-container and organize them accordingly
     const futureGigs = await GetAllGigs();
 
@@ -139,7 +140,7 @@ async function PopulateCalendarPage(){
     else{
         // Group gigs by year
         const groupedGigs = GroupByYear(futureGigs);
-        console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
+        //console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
 
         groupedGigs.forEach((group) => {
             // Create header for year
@@ -158,14 +159,13 @@ async function PopulateCalendarPage(){
 
 // Display upcoming shows on html page using data returned from API with update, delete, and create functionality
 async function PopulateEditCalendarPage(){
-    console.log("Running PopulateEditCalendarPage");
     const eventContainer = document.getElementById("event_container");
     //Retrieve gig lists for each band/db-container and organize them accordingly
     const futureGigs = await GetAllGigs();
 
     // Group gigs by year
     const groupedGigs = GroupByYear(futureGigs);
-    console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
+    //console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
 
     groupedGigs.forEach((group) => {
         // Create header for year
@@ -263,8 +263,6 @@ async function OnDeleteGig(gigId){
 
 // Function to make PUT request to update selected gig
 async function EditGigSubmit(currentGig){
-    console.log("Update Gig Form Submitted");
-
     // Get updated gig information
     const gigTitleInput = document.getElementById("GigTitle");
     const gigDescriptionInput = document.getElementById("GigDescription");
@@ -293,7 +291,6 @@ async function EditGigSubmit(currentGig){
 }
 
 async function CreateGigSubmit(){
-    console.log("Create Gig Form Submitted");
     // Get new gig information
     const gigTitleInput = document.getElementById("GigTitle");
     const gigDescriptionInput = document.getElementById("GigDescription");
@@ -330,7 +327,7 @@ async function GetAllGigs(){
                                                                                 ]);
 
     const combinedGigs = drGigs.concat(tjGigs, roGigs, glbGigs, personalGigs);
-    console.log(combinedGigs);
+    //console.log(combinedGigs);
 
     // Filter out past gigs
     const currentDate = new Date();
