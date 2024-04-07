@@ -29,15 +29,15 @@ var customLoadedEvent = new CustomEvent("AllPageContentLoaded");
 window.onload = async () => {
     if (document.body.classList.contains("upcomingshows")){
         await PopulateCalendarPage();
-        window.dispatchEvent(customLoadedEvent);
     }
     else if (document.body.classList.contains("editcalendar")){
         await PopulateEditCalendarPage();
         closeButton.addEventListener("click", () => CloseModal());
         //console.log(`current date: ${currentDate.toLocaleString('en-us')}`);
         document.getElementById('GigDateAndTime').value = dateHelper.formatDate(new Date());
-        window.dispatchEvent(customLoadedEvent);
-}
+    }
+
+window.dispatchEvent(customLoadedEvent);
 
 // Create single calendar html object for a gig object
 function CreateCalendarObject(gig){
